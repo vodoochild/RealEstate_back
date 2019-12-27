@@ -14,6 +14,6 @@ public interface AnnonceRepository extends JpaRepository<Annonce,Long> {
     List<Annonce> findAnnoncesByAgent(Agent agent);
 
     @Modifying
-    @Query("update Annonce a set a.etat = ?2 where u.id = ?1")
+    @Query("update Annonce a set a.etat = ?2 where a.id = ?1")
     void setEtat(Long id_annonce, String etat);
 }

@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 @Data
 @Entity
-public class photos implements Serializable {
+public class Photo implements Serializable {
 
     @Id @GeneratedValue
     private Long id;

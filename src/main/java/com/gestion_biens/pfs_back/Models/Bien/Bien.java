@@ -22,7 +22,8 @@ public class Bien {
 
     private double surface;
 
-    private List<String> photo;
+    @OneToMany
+    private List<Photo> photos;
 
     private String description;
 
