@@ -18,11 +18,10 @@ public class Adresse {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String no;
-    private String rue;
-    private String quartier;
+
+
     private String code_postal;
     private String ville;
-    private String pays;
+
 
 }

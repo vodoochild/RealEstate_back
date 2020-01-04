@@ -21,11 +21,11 @@ public class CustomUserDetails implements UserDetails {
     }*/
     public CustomUserDetails(Utilisateur user){
        // super(userName);
-        this.username=user.getEmail();
+      /*  this.username=user.getEmail();
         this.pass=user.getPassword();
         this.authorities = Arrays.stream(user.getRole().split(","))
                 .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
     }
 
     @Override

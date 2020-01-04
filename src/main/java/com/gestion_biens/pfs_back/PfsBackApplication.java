@@ -1,8 +1,11 @@
 package com.gestion_biens.pfs_back;
 
+import com.gestion_biens.pfs_back.Models.Bien.Annonce;
+import com.gestion_biens.pfs_back.Models.Bien.Photo;
 import com.gestion_biens.pfs_back.Models.user.Admin;
 import com.gestion_biens.pfs_back.Models.user.Agent;
 import com.gestion_biens.pfs_back.Models.user.Utilisateur;
+import com.gestion_biens.pfs_back.Repositories.BienRepositories.AnnonceRepository;
 import com.gestion_biens.pfs_back.Repositories.UserRepositories.AdminRepository;
 import com.gestion_biens.pfs_back.Repositories.UserRepositories.AgentRepository;
 import com.gestion_biens.pfs_back.Repositories.UserRepositories.UtilisateurRepository;
@@ -10,10 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableJpaRepositories/*(basePackageClasses = UtilisateurRepository.class)*/
 @SpringBootApplication
+
 public class PfsBackApplication implements CommandLineRunner {
 
     @Autowired
@@ -22,6 +27,8 @@ public class PfsBackApplication implements CommandLineRunner {
     AdminRepository adminRepository;
     @Autowired
     AgentRepository agentRepository;
+    @Autowired
+    AnnonceRepository annonceRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(PfsBackApplication.class, args);
@@ -29,7 +36,8 @@ public class PfsBackApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Agent agent= new Agent();
+     annonceRepository.save(new Annonce("titre1","ville","addresse",new Photo("photo1"),new Photo("photos2")));
+      /*  Agent agent= new Agent();
         agent.setEmail("agent1@gmail.com");
         agent.setPassword("agent1pass");
         agent.setNom("NomAgent1");
@@ -52,7 +60,7 @@ public class PfsBackApplication implements CommandLineRunner {
         admin.setPrenom("Prenomadmin");
         admin.setNum_telephone("0658236478");
         admin.setRole("ROLE_ADMIN");
-        adminRepository.save(admin);
+        adminRepository.save(admin);*/
 
 
 

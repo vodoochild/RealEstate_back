@@ -1,5 +1,6 @@
 package com.gestion_biens.pfs_back.Models.Bien;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.gestion_biens.pfs_back.Models.user.Proprietaire;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,23 +18,18 @@ public class Bien {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    private String type;
     private int nb_pieces;
-
     private double surface;
-
-    @OneToMany
-    private List<Photo> photos;
-
     private String description;
-
     private double prix;
-
     private double pourcentage_commission;
+    @OneToOne( fetch = FetchType.LAZY, cascade =  CascadeType.ALL)
+    @JoinColumn(name="annonce_id")
+    @JsonBackReference
+    private Annonce annonce;
 
-    @OneToOne
-    private Adresse adresse;
+    public Bien() {
+    }
 
-    @OneToOne
-    private Proprietaire proprietaire;
 }

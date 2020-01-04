@@ -1,11 +1,20 @@
 package com.gestion_biens.pfs_back.Models.Bien;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gestion_biens.pfs_back.Models.user.Agent;
+import com.gestion_biens.pfs_back.Models.user.Proprietaire;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Getter
 @Setter
@@ -15,23 +24,50 @@ public class Annonce {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    private String titre;
+    private String etat;//vente ou location
+    private String type_annonce;
+    private String ville;
+    private String adresse;
+    private String code_postal;
     private String date_publication;
     private String date_disponibilite;
-    private String titre;
-    private String etat;
-    private String type_annonce;
 
     @ManyToOne
     @JoinColumn(name = "Agent_id")
     private Agent agent;
-
-    @OneToOne
+    @OneToOne(mappedBy = "annonce",fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Bien bien;
+    @JsonManagedReference
+    @OneToOne( mappedBy = "annonce",fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
+    private Proprietaire proprietaire;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "annonce",fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
+    private Set<Photo> photos ;
 
-    public double calculerCommission(Bien b){
-        return b.getPrix()*b.getPourcentage_commission()/100;
+    public Annonce(String titre, String ville,String adresse ,Photo... photos){
+        this.titre=titre;
+        this.ville=ville;
+        this.adresse=adresse;
+        this.photos= Stream.of(photos).collect(Collectors.toSet());
+        this.photos.forEach(x -> x.setAnnonce(this));
+
+}
+
+    public void calculerCommission(Bien b) {
+        //  return b.getPrix()*b.getPourcentage_commission()/100;
 
     }
 
+    public Proprietaire getProprietaire() {
+        return proprietaire;
+
+    }
+
+    public void setProprietaire(Proprietaire proprietaire) {
+        this.proprietaire = proprietaire;
+    }
 }
+
+
