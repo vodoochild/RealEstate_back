@@ -1,5 +1,6 @@
 package com.gestion_biens.pfs_back.Models.Bien;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gestion_biens.pfs_back.Models.user.Agent;
@@ -32,16 +33,19 @@ public class Annonce {
     private String code_postal;
     private String date_publication;
     private String date_disponibilite;
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "Agent_id")
     private Agent agent;
-    @OneToOne(mappedBy = "annonce",fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
+
     @JsonManagedReference
+    @OneToOne(mappedBy = "annonce",fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
     private Bien bien;
+
     @JsonManagedReference
     @OneToOne( mappedBy = "annonce",fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
     private Proprietaire proprietaire;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "annonce",fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
     private Set<Photo> photos ;
@@ -54,6 +58,14 @@ public class Annonce {
         this.photos.forEach(x -> x.setAnnonce(this));
 
 }
+
+    public Agent getAgent() {
+        return agent;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
 
     public void calculerCommission(Bien b) {
         //  return b.getPrix()*b.getPourcentage_commission()/100;

@@ -3,14 +3,20 @@ package com.gestion_biens.pfs_back.Controllers.BienControllers;
 import com.gestion_biens.pfs_back.Models.Bien.Annonce;
 import com.gestion_biens.pfs_back.Models.user.Agent;
 import com.gestion_biens.pfs_back.Models.user.Proprietaire;
+import com.gestion_biens.pfs_back.Models.user.Utilisateur;
+import com.gestion_biens.pfs_back.Repositories.UserRepositories.AgentRepository;
 import com.gestion_biens.pfs_back.Services.BienServices.AnnonceService;
 import com.gestion_biens.pfs_back.Services.UserSrevices.AgentService;
 import com.gestion_biens.pfs_back.Services.UserSrevices.ProprietaireService;
+import com.gestion_biens.pfs_back.Services.UserSrevices.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import sun.management.resources.agent;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.hateoas.IanaLinkRelations.TAG;
 
@@ -18,7 +24,8 @@ import static org.springframework.hateoas.IanaLinkRelations.TAG;
 @RestController
 @RequestMapping(value = "/annonce" )
 public class AnnonceController {
-
+    @Autowired
+    UserService userService;
     @Autowired
     AnnonceService annonceService;
 
@@ -34,6 +41,12 @@ public AnnonceController( AnnonceService annonceService,ProprietaireService prop
     public void saveAnnonce(@RequestBody Annonce annonce){
         annonceService.saveAnnonce(annonce);
 
+
+    }
+    @RequestMapping(value = "DeleteAnnonce/{id}")
+    public void deleteAnnonce(@PathVariable("id") Long id)
+    {
+    annonceService.deleteAnnonce(id);
     }
 
     @RequestMapping("changerEtat")
@@ -41,10 +54,9 @@ public AnnonceController( AnnonceService annonceService,ProprietaireService prop
         annonceService.changerEtat(id_annonce, etat);
     }
 
-    @GetMapping("annoncesByAgent")
-    public List<Annonce> getAnnonces(@RequestParam("id_agent") Long id_agent){
-        Agent agent= agentService.getAgent(id_agent);
-        return annonceService.getAnnoncesByAgent(agent);
+   @GetMapping("annoncesByAgent/{id}")
+    public List<Annonce> getAnnonces(@PathVariable("id") Long id){
+    return annonceService.getAnnoncesByAgent(id);
     }
 
     @GetMapping("allAnnonces")

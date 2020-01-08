@@ -36,7 +36,9 @@ public class PfsBackApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-     annonceRepository.save(new Annonce("titre1","ville","addresse",new Photo("photo1"),new Photo("photos2")));
+        Agent agent = new Agent("khawla","elhadri");
+        agentRepository.save(agent);
+
       /*  Agent agent= new Agent();
         agent.setEmail("agent1@gmail.com");
         agent.setPassword("agent1pass");

@@ -24,12 +24,10 @@ public class Bien {
     private String description;
     private double prix;
     private double pourcentage_commission;
+    @JsonBackReference
     @OneToOne( fetch = FetchType.LAZY, cascade =  CascadeType.ALL)
     @JoinColumn(name="annonce_id")
-    @JsonBackReference
     private Annonce annonce;
 
-    public Bien() {
-    }
 
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class ProprietaireService {
     @Autowired
     ProprietaireRepository proprietaireRepository;
-    public void saveProprietaire(Proprietaire p){
+    public void saveAgent(Proprietaire p){
          proprietaireRepository.save(p);
     }
 }

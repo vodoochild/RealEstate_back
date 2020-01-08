@@ -22,7 +22,7 @@ public class Agence {
 
     @OneToOne
     private Adresse adresse;
-
+/*
     @OneToMany(mappedBy = "agence")
-    private List<Agent> agents;
+    private List<Agent> agents;*/
 }
