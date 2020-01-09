@@ -23,7 +23,7 @@ public class Proprietaire {
     private String tel;
     @OneToOne( fetch = FetchType.LAZY, cascade =  CascadeType.ALL)
     @JoinColumn(name="annonce_id")
-    @JsonBackReference
+  /*  @JsonBackReference*/
     private Annonce annonce;
 
     public Annonce getAnnonce() {

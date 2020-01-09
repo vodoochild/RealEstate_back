@@ -3,16 +3,15 @@ package com.gestion_biens.pfs_back.Controllers.BienControllers;
 import com.gestion_biens.pfs_back.Models.Bien.Annonce;
 import com.gestion_biens.pfs_back.Models.user.Agent;
 import com.gestion_biens.pfs_back.Models.user.Proprietaire;
-import com.gestion_biens.pfs_back.Models.user.Utilisateur;
-import com.gestion_biens.pfs_back.Repositories.UserRepositories.AgentRepository;
+import com.gestion_biens.pfs_back.Repositories.BienRepositories.AnnonceRepository;
 import com.gestion_biens.pfs_back.Services.BienServices.AnnonceService;
 import com.gestion_biens.pfs_back.Services.UserSrevices.AgentService;
 import com.gestion_biens.pfs_back.Services.UserSrevices.ProprietaireService;
 import com.gestion_biens.pfs_back.Services.UserSrevices.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sun.management.resources.agent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +23,12 @@ import static org.springframework.hateoas.IanaLinkRelations.TAG;
 @RestController
 @RequestMapping(value = "/annonce" )
 public class AnnonceController {
-    @Autowired
-    UserService userService;
+
     @Autowired
     AnnonceService annonceService;
+
+    @Autowired
+    AnnonceRepository annonceRepository;
 
     @Autowired
     AgentService agentService;
@@ -63,4 +64,25 @@ public AnnonceController( AnnonceService annonceService,ProprietaireService prop
     public List<Annonce> getAllAnnoces(){
         return annonceService.getAllAnnonces();
     }
+
+    @GetMapping("/annonce/{id}")
+    ResponseEntity<?> getAnnonce(@PathVariable Long id){
+        Optional<Annonce> annonce= annonceRepository.findById(id);
+        return annonce.map(response -> ResponseEntity.ok().body(response))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+/*
+
+    @GetMapping("getAgent/{id}")
+    Agent getAgentAnnonce(@PathVariable Long id){
+        return agentService.getAgent(annonceRepository.getAnnonceAgent(id));
+    }
+*/
+
+ /*  @GetMapping("/ann/{id}")
+    Annonce getAnnoce(@PathVariable Long id){
+       return annonceRepository.getOne(id);
+
+   }*/
 }

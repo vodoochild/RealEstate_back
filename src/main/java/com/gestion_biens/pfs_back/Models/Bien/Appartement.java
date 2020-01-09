@@ -1,3 +1,4 @@
+/*
 package com.gestion_biens.pfs_back.Models.Bien;
 
 import lombok.Getter;
@@ -21,3 +22,4 @@ public class Appartement extends Bien {
 
     private int num_etage;
 }
+*/

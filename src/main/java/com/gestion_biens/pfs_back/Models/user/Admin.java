@@ -10,14 +10,19 @@ import javax.persistence.Id;
 @Entity
 public class Admin extends Utilisateur {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Override
+    public void setRole(String role) {
+        super.setRole("ROLE_ADMIN");
+    }
 
 
 
-/*
+    /*
     public Admin(Admin a) {
         super(a);
 

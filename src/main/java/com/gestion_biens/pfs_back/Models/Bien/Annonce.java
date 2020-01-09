@@ -33,20 +33,19 @@ public class Annonce {
     private String code_postal;
     private String date_publication;
     private String date_disponibilite;
-    @JsonBackReference
+   @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "Agent_id")
     private Agent agent;
-
-    @JsonManagedReference
     @OneToOne(mappedBy = "annonce",fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
+//    @JsonManagedReference
+
     private Bien bien;
 
-    @JsonManagedReference
     @OneToOne( mappedBy = "annonce",fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
     private Proprietaire proprietaire;
-
-    @JsonManagedReference
+//    @JsonManagedReference
     @OneToMany(mappedBy = "annonce",fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
     private Set<Photo> photos ;
 
@@ -59,26 +58,17 @@ public class Annonce {
 
 }
 
+    public void calculerCommission(Bien b) {
+        //  return b.getPrix()*b.getPourcentage_commission()/100;
+
+    }
+
     public Agent getAgent() {
         return agent;
     }
 
     public void setAgent(Agent agent) {
         this.agent = agent;
-    }
-
-    public void calculerCommission(Bien b) {
-        //  return b.getPrix()*b.getPourcentage_commission()/100;
-
-    }
-
-    public Proprietaire getProprietaire() {
-        return proprietaire;
-
-    }
-
-    public void setProprietaire(Proprietaire proprietaire) {
-        this.proprietaire = proprietaire;
     }
 }
 

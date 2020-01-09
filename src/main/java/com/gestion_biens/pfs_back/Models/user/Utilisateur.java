@@ -1,19 +1,21 @@
 package com.gestion_biens.pfs_back.Models.user;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.gestion_biens.pfs_back.Models.Bien.Annonce;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
-import java.util.Set;
 
 
 @Data
 @AllArgsConstructor
 @Entity
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name ="USER_TYPE")
+//@DiscriminatorColumn(name ="USER_TYPE")
 public class Utilisateur {
+
+    public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
 
     @Id
@@ -30,8 +32,7 @@ public class Utilisateur {
    private String password;
    private String role;
 
-
-    /*    public Utilisateur(Utilisateur u){
+/*    public Utilisateur(Utilisateur u){
         this.id= u.id;
         this.nom= u.nom;
         this.prenom=u.prenom;
@@ -45,5 +46,5 @@ public Utilisateur(String nom,String prenom){
         this.nom=nom;
         this.prenom=prenom;
 }
- 
+
 }

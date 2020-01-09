@@ -5,6 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
+
         <version>2.2.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
@@ -67,7 +68,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
+       <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
@@ -78,15 +79,21 @@
             <version>4.13-rc-2</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
+
+
         <plugins>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+
             </plugin>
         </plugins>
+
     </build>
 
 </project>

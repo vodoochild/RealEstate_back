@@ -1,3 +1,4 @@
+/*
 package com.gestion_biens.pfs_back.Models.Bien;
 
 import lombok.Getter;
@@ -23,3 +24,4 @@ public class Maison extends Bien {
 
 
 }
+*/

@@ -1,7 +1,7 @@
 package com.gestion_biens.pfs_back.Models.user;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gestion_biens.pfs_back.Models.Bien.Agence;
 import com.gestion_biens.pfs_back.Models.Bien.Annonce;
@@ -15,21 +15,25 @@ import java.util.stream.Stream;
 
 @Data
 @Entity
-
 public class Agent extends Utilisateur {
+
+    @Override
+    public void setRole(String role) {
+        super.setRole("ROLE_USER");
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "agent",fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
     private Set<Annonce> annonces;
 
-  /*  @ManyToOne
+ @ManyToOne
     @JoinColumn(name = "agence_id")
     private Agence agence;
-*/
+
     public Set<Annonce> getAnnonces() {
         return annonces;
     }

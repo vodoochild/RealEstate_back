@@ -15,9 +15,9 @@ public class Photo implements Serializable {
     private Long id;
     @Column(columnDefinition = "text")
     private String data;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
-    @JoinColumn(name = "annonce_id", nullable = false)
+    @ManyToOne//(fetch = FetchType.LAZY)
+   // @JsonBackReference
+    @JoinColumn(name = "annonce_id")//, nullable = false)
     private Annonce annonce;
 
     public Annonce getAnnonce() {

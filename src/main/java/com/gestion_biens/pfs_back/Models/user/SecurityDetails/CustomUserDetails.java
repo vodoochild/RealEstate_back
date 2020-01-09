@@ -16,16 +16,18 @@ public class CustomUserDetails implements UserDetails {
     private String username;
     private String pass;
     private List<GrantedAuthority> authorities;
-  /*  public CustomUserDetails(final Utilisateur utilisateur){
+ /* public CustomUserDetails(final Utilisateur utilisateur){
         super(utilisateur);
     }*/
+
     public CustomUserDetails(Utilisateur user){
        // super(userName);
-      /*  this.username=user.getEmail();
+  this.username=user.getEmail();
         this.pass=user.getPassword();
         this.authorities = Arrays.stream(user.getRole().split(","))
                 .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());*/
+                .collect(Collectors.toList());
+
     }
 
     @Override

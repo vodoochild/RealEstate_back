@@ -1,3 +1,4 @@
+/*
 package com.gestion_biens.pfs_back.Models.Bien;
 
 import lombok.Getter;
@@ -20,3 +21,4 @@ public class Garage extends Bien {
     private Long id;
 
 }
+*/

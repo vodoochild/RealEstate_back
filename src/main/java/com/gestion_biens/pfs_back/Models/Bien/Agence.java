@@ -19,10 +19,8 @@ public class Agence {
 
     private String email;
     private String numTelephone;
+    private String adresse;
 
-    @OneToOne
-    private Adresse adresse;
-/*
     @OneToMany(mappedBy = "agence")
-    private List<Agent> agents;*/
+    private List<Agent> agents;
 }

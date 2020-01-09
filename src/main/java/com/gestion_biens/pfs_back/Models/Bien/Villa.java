@@ -1,3 +1,4 @@
+/*
 package com.gestion_biens.pfs_back.Models.Bien;
 
 
@@ -26,3 +27,4 @@ public class Villa extends Bien {
     private double surface_garage;
 
 }
+*/
